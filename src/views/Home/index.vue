@@ -1,17 +1,20 @@
 <template>
     <div>
-        <h1>这是Home页面</h1>
+        <Header />
         <TabBar />
     </div>
 </template>
 
 <script>
 import TabBar from '@/components/TabBar'
+import Header from '@/components/Header'
+
 
 export default {
     name : 'Home',
     components : {
-        TabBar
+        TabBar,
+        Header
     }
 }
 </script>
