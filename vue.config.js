@@ -1,11 +1,20 @@
 module.exports = {
     devServer : {
         proxy : {
-            '/api' : {
-                target : 'http://39.97.33.178',
+            '/a' : {
+                target : 'https://web-api.juejin.im',
                 changeOrigin : true,
+                secure: false,
                 pathRewrite: {
-                  '^/a': '/'
+                    '^/a' : ''
+                }
+            },
+            '/img' : {
+                target : 'https://user-gold-cdn.xitu.io',
+                changeOrigin : true,
+                secure: false,
+                pathRewrite: {
+                    '^/img' : ''
                 }
             }
         }

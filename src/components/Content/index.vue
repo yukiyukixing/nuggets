@@ -1,32 +1,117 @@
 <template>
-    <yd-list theme="4">
-        <yd-list-item v-for="item, key in list" :key="key">
-            <img slot="img" :src="item.img">
-            <span slot="title">{{item.title}}</span>
-            <yd-list-other slot="other">
-                <div>
-                    <span class="demo-list-price"><em>¥</em>{{item.price}}</span>
-                    <span class="demo-list-del-price">¥{{item.w_price}}</span>
+    <div>
+        <div class="conent" v-for="item in detail">
+            <a :href="item.node.originalUrl">
+                <div class="row1">
+                    <div class="user_info">
+                        <div class="img"></div>
+                        <span>{{ item.node.user.username }}</span>
+                    </div>
+                    <div class="type">
+                        <span>{{ item.node.tags[0].title }}</span>
+                        <span v-if="item.node.tags[1]">/{{ item.node.tags[1].title }}</span>
+                    </div>
                 </div>
-                <div>content</div>
-            </yd-list-other>
-        </yd-list-item>
-    </yd-list>
+                <div class="row2">
+                    <div class="title">
+                        <h1>{{ item.node.title }}</h1>
+                    </div>
+                    <div class="main_content">
+                        <p>{{ item.node.content.substring(0,80) }}...</p>
+                    </div>
+                </div>
+                <div class="row3">
+                    <div class="praise">点赞<span>{{ item.node.likeCount }}</span></div>
+                    <div class="comment">评论<span>{{ item.node.commentsCount }}</span></div>
+                </div>
+            </a>
+        </div>
+    </div>
 </template>
 
-<script type="text/babel">
-    export default {
-        data() {
-            return {
-                list: [
-                    {img: "//img1.shikee.com/try/2016/06/23/14381920926024616259.jpg", title: "标题111标题标题标题标题", price: 156.23, w_price: 89.36},
-                    {img: "//img1.shikee.com/try/2016/06/21/10172020923917672923.jpg", title: "标题222标题标题标题标题", price: 256.23, w_price: 89.36},
-                    {img: "//img1.shikee.com/try/2016/06/23/15395220917905380014.jpg", title: "标题333标题标题标题标题", price: 356.23, w_price: 89.36},
-                    {img: "//img1.shikee.com/try/2016/06/25/14244120933639105658.jpg", title: "标题444标题标题标题标题", price: 456.23, w_price: 89.36},
-                    {img: "//img1.shikee.com/try/2016/06/26/12365720933909085511.jpg", title: "标题555标题标题标题标题", price: 556.23, w_price: 89.36},
-                    {img: "//img1.shikee.com/try/2016/06/19/09430120929215230041.jpg", title: "标题666标题标题标题标题", price: 656.23, w_price: 89.36}
-                ]
-            }
+<script>
+export default {
+    name : 'Content',
+    data(){
+        return {
+            detail:{}
         }
-    }
+    },
+    methods:{
+
+    },
+    mounted(){
+        let headers = {
+                        "Content-Type": "application/json",
+                        "X-Agent": "Juejin/Web",
+                        "X-Legacy-Device-Id": "1566352286393",
+                        "X-Legacy-Token": "eyJhY2Nlc3NfdG9rZW4iOiIzb2d4SGZJZTF2N0RROFI4IiwicmVmcmVzaF90b2tlbiI6InVFMm9RU3E2QmxZbjZkTDIiLCJ0b2tlbl90eXBlIjoibWFjIiwiZXhwaXJlX2luIjoyNTkyMDAwfQ==",
+                        "X-Legacy-Uid": "5d5988d7f265da03ca116b43"
+                    };
+        let data = {
+                    "extensions": {"query": {"id": "21207e9ddb1de777adeaca7a2fb38030"}},
+                    "operationName": "",
+                    "query": "",
+                    "variables": {"first": 20, "after": "", "order": "POPULAR"},
+                    "after": "",
+                    "first": 20,
+                    "order": "POPULAR"
+                };
+        this.axios.post('/a/query',data,{headers: headers}).then((res) => {
+            this.detail = res.data.data.articleFeed.items.edges;
+            console.log(res.data.data.articleFeed.items.edges)
+        });
+    },
+}
 </script>
+
+<style scoped>
+    .conent{
+        width: 100%;
+        height: 110px;
+        margin: 5px 0;
+        background: white;
+        overflow-y:auto; 
+    }
+    .conent .row1{
+        width: 100%;
+        height: 20px;
+        display: flex;
+    }
+    .conent .row1 .user_info{
+        display: flex;
+        text-align: center;
+        align-items: center;
+    }
+    .conent .row1 .type{
+        position: absolute;
+        right: 5px;
+    }
+    .conent .row1 .user_info .img{
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border-radius: 5px;
+        background-image: url("../../assets/logo.png");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .conent .row2 {
+        width: 100%;
+        height: 60px;
+        margin: 5px 0;
+    }
+    .conent .row3{
+        width:100%;
+        height: 20px;
+        display: flex;
+        flex: 1;
+        padding: 0 5px;
+    }
+    .conent .row3 .praise {
+        padding:0 5px;
+    }
+    .conent .row3 .comment {
+        padding:0 5px;
+    }
+</style>

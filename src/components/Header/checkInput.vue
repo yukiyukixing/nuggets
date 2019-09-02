@@ -50,8 +50,24 @@ export default {
         }
     },
     mounted(){
-        this.axios.get('a/api/movieOnInfoList?cityListId=10').then((res) => {
-            console.log(res)
+        let headers = {
+                        "Content-Type": "application/json",
+                        "X-Agent": "Juejin/Web",
+                        "X-Legacy-Device-Id": "1566352286393",
+                        "X-Legacy-Token": "eyJhY2Nlc3NfdG9rZW4iOiIzb2d4SGZJZTF2N0RROFI4IiwicmVmcmVzaF90b2tlbiI6InVFMm9RU3E2QmxZbjZkTDIiLCJ0b2tlbl90eXBlIjoibWFjIiwiZXhwaXJlX2luIjoyNTkyMDAwfQ==",
+                        "X-Legacy-Uid": "5d5988d7f265da03ca116b43"
+                    };
+        let data = {
+                    "extensions": {"query": {"id": "21207e9ddb1de777adeaca7a2fb38030"}},
+                    "operationName": "",
+                    "query": "",
+                    "variables": {"first": 20, "after": "", "order": "POPULAR"},
+                    "after": "",
+                    "first": 20,
+                    "order": "POPULAR"
+                };
+        this.axios.post('/a/query',data,{headers: headers}).then((res) => {
+            // console.log(res)
         })
     },
     methods:{
