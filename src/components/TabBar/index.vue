@@ -29,9 +29,9 @@ export default {
 <style scoped>
     #footer{
         width: 100%;
-        height: 50px;
+        height: 45px;
         background: white;
-        box-shadow: 0px -1px 1px rgba(243,243,243,0.95);
+        /* box-shadow: 0px -1px 1px rgba(243,243,243,0.95); */
         position: fixed;
         left: 0;
         bottom: 0;

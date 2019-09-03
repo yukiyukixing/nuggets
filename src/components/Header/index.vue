@@ -1,7 +1,6 @@
 <template>
     <div>
         <Search />
-        <CheakInput />
     </div>
 </template>
 
