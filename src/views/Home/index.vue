@@ -23,8 +23,8 @@ export default {
     .content{
         width: 100%;
         height: 812px;
-        background: url(../../../public/back.png) center center no-repeat;
+        /* background: url(../../../public/back.png) center center no-repeat;
         background-size: 100% 812px;
-        z-index: 90000;
+        z-index: 90000; */
     }
 </style>

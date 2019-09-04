@@ -1,30 +1,37 @@
 <template>
     <div>
-        <div class="conent" v-for="item in detail">
-            <a :href="item.node.originalUrl">
-                <div class="row1">
-                    <div class="user_info">
-                        <div class="img"></div>
-                        <span>{{ item.node.user.username }}</span>
+        <div class="center_body">
+            <!-- <div class="seat"></div> -->
+            <div class="wrap" v-for="item in detail">
+                <a :href="item.node.originalUrl">
+                    <div class="row1">
+                        <div class="left">
+                            <div class="img"></div>
+                            <span>{{ item.node.user.username }}</span>
+                        </div>
+                        <div class="right">
+                            <span>{{ item.node.tags[0].title }}</span>
+                            <span v-if="item.node.tags[1]">/{{ item.node.tags[1].title }}</span>
+                        </div>
                     </div>
-                    <div class="type">
-                        <span>{{ item.node.tags[0].title }}</span>
-                        <span v-if="item.node.tags[1]">/{{ item.node.tags[1].title }}</span>
+                    <div class="row2">
+                        <span class="title">{{ item.node.title }}</span>
+                        <p class="content">
+                            {{ item.node.content.substring(0,90) }}...
+                        </p>
                     </div>
-                </div>
-                <div class="row2">
-                    <div class="title">
-                        <h1>{{ item.node.title }}</h1>
+                    <div class="row3">
+                        <div class="zan">
+                            <i class="iconfont icon-zan"></i>
+                            <span>{{ item.node.likeCount }}</span>
+                        </div>
+                        <div class="pinglun">
+                            <i class="iconfont icon-pinglun"></i>
+                            <span>{{ item.node.commentsCount }}</span>
+                        </div>
                     </div>
-                    <div class="main_content">
-                        <p>{{ item.node.content.substring(0,80) }}...</p>
-                    </div>
-                </div>
-                <div class="row3">
-                    <div class="praise">点赞<span>{{ item.node.likeCount }}</span></div>
-                    <div class="comment">评论<span>{{ item.node.commentsCount }}</span></div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </template>
@@ -66,52 +73,126 @@ export default {
 </script>
 
 <style scoped>
-    .conent{
+    .center_body{
+        width: 100%;
+        /* flex:1;
+        overflow: scroll; */
+        background-color:#f4f6f9;
+        /* border: 1px solid red; */
+    }
+    .seat{
         width: 100%;
         height: 110px;
-        margin: 5px 0;
-        background: white;
-        overflow-y:auto; 
+        /* border: 1px solid seagreen; */
     }
-    .conent .row1{
+    .wrap{
         width: 100%;
-        height: 20px;
+        height: 166px;
+        margin: 4px 0;
+        background-color:white; 
+        /* border: 1px solid gold; */
+        /* background: white; */
+    }
+    .row1{
+        width: 100%;
+        height: 40px;
+        /* border: 1px solid aqua; */
         display: flex;
     }
-    .conent .row1 .user_info{
+    .left{
+        float: left;
+        height: 40px;
+        flex:1;
+        /* border: 1px solid red; */
         display: flex;
-        text-align: center;
-        align-items: center;
+        line-height: 1;
+        padding:13px 7px;
     }
-    .conent .row1 .type{
-        position: absolute;
-        right: 5px;
-    }
-    .conent .row1 .user_info .img{
-        width: 20px;
-        height: 20px;
-        display: inline-block;
-        border-radius: 5px;
+    .img{
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background-color: red;
         background-image: url("../../assets/logo.png");
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }
-    .conent .row2 {
+    .left span{
+        padding-left:3px; 
+        padding-top:3px; 
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0;
+        color: #515152;
+    }
+    .right{
+        float: right;
+        flex:1;
+        padding:13px 6px;
+        text-align: right;
+        /* border: 1px solid red; */
+        color: #8a9aa9;
+        font-size: 11px;
+        font-weight: 400;
+    }
+    .row2{
         width: 100%;
-        height: 60px;
-        margin: 5px 0;
+        height: 85px;
+        /* border: 1px solid red; */
     }
-    .conent .row3{
-        width:100%;
-        height: 20px;
+    .title{
+        position: relative;
+        top: 4px;
+        left: 8px;
+        font-size:15px;
+        font-weight: 600; 
+        color: #1c1c1e;
+    }
+    .content{
+        color: #67727b;
+        position: relative;
+        top: 10px;
+        left: 8px;
+        font-size:12px;
+        font-weight: 500; 
+        line-height: 18px;
+        letter-spacing: 0.5px;
+    }
+    .row3{
         display: flex;
-        flex: 1;
-        padding: 0 5px;
+        width: 100%;
+        height: 40px;
+        line-height: 1;
+        /* border: 1px solid aquamarine; */
     }
-    .conent .row3 .praise {
-        padding:0 5px;
+    .zan{
+        position: relative;
+        font-size:15px;
+        color: #949ca8;
+        top: 8px;
+        left: 7px;
     }
-    .conent .row3 .comment {
-        padding:0 5px;
+    .zan i{
+        font-size:15px;
+        color: #949ca8;
+    }
+    .zan span{
+        font-size:12px;
+        color: #92a1af;
+    }
+    .pinglun{
+        position: relative;
+        color: #949ca8;
+        top: 10px;
+        left: 24px;
+    }
+    .pinglun i{
+        font-size:10px;
+        color: #949ca8;
+    }
+    .pinglun span{
+        font-size:12px;
+        color: #92a1af;
+        padding-left: 3px;
     }
 </style>
