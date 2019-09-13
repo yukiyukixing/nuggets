@@ -1,17 +1,19 @@
 <template>
     <div>
-        <h1>这是搜索页面</h1>
+        <Header />
         <TabBar />
     </div>
 </template>
 
 <script>
 import TabBar from '@/components/TabBar'
+import Header from '@/components/Header'
 
 export default {
     name : 'Search',
     components : {
-        TabBar
+        TabBar,
+        Header
     }
 }
 </script>

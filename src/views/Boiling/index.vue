@@ -1,17 +1,25 @@
 <template>
     <div>
-        <h1>这是沸点页面</h1>
+        <ListTag />
+        <Carousel />
+        <List />
         <TabBar />
     </div>
 </template>
 
 <script>
 import TabBar from '@/components/TabBar'
+import ListTag from '@/components/ListTag'
+import Carousel from '@/views/Boiling/carousel'
+import List from '@/views/Boiling/list'
 
 export default {
     name : 'Boiling',
     components : {
-        TabBar
+        TabBar,
+        ListTag,
+        Carousel,
+        List
     }
 }
 </script>

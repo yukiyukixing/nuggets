@@ -1,20 +1,28 @@
 <template>
     <div class="content">
         <Header />
+        <Auto />
+        <Content />
+        <Button />
         <TabBar /> 
     </div>
 </template>
 
 <script>
-import TabBar from '@/components/TabBar'
 import Header from '@/components/Header'
-
+import Auto from './auto'
+import Content from '@/components/Content'
+import Button from './button'
+import TabBar from '@/components/TabBar'
 
 export default {
     name : 'Home',
     components : {
-        TabBar,
-        Header
+        Header,
+        Auto,
+        Content,
+        Button,
+        TabBar
     }
 }
 </script>
@@ -22,9 +30,10 @@ export default {
 <style scoped>
     .content{
         width: 100%;
-        height: 812px;
-        /* background: url(../../../public/back.png) center center no-repeat;
-        background-size: 100% 812px;
-        z-index: 90000; */
+        height: 100%;
+        flex: 1;
+        overflow: auto;
+        /* background: url(../../../public/首页关注.png) center center no-repeat;
+        background-size: 100% 100%; */
     }
 </style>

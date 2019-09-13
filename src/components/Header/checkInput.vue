@@ -1,81 +1,19 @@
 <template>
-    <yd-tab horizontal-scroll>
-        <yd-tab-panel label="关注">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="推荐">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="热榜">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="后端">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="前端">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="Android">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="iOS">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="人工智能">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="开发工具">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="代码人生">
-            
-        </yd-tab-panel>
-        <yd-tab-panel label="阅读">
-            
-        </yd-tab-panel>
-    </yd-tab>
+    <div class="tag_list">
+
+    </div>
 </template>
 
 <script>
-import Content from '@/components/Content'
-
 export default {
-    name : 'CheckInput',
-    components : {
-        Content
-    },
-    data (){
-        return{
-
-        }
-    },
-    mounted(){
-        let headers = {
-                        "Content-Type": "application/json",
-                        "X-Agent": "Juejin/Web",
-                        "X-Legacy-Device-Id": "1566352286393",
-                        "X-Legacy-Token": "eyJhY2Nlc3NfdG9rZW4iOiIzb2d4SGZJZTF2N0RROFI4IiwicmVmcmVzaF90b2tlbiI6InVFMm9RU3E2QmxZbjZkTDIiLCJ0b2tlbl90eXBlIjoibWFjIiwiZXhwaXJlX2luIjoyNTkyMDAwfQ==",
-                        "X-Legacy-Uid": "5d5988d7f265da03ca116b43"
-                    };
-        let data = {
-                    "extensions": {"query": {"id": "21207e9ddb1de777adeaca7a2fb38030"}},
-                    "operationName": "",
-                    "query": "",
-                    "variables": {"first": 20, "after": "", "order": "POPULAR"},
-                    "after": "",
-                    "first": 20,
-                    "order": "POPULAR"
-                };
-        this.axios.post('/a/query',data,{headers: headers}).then((res) => {
-            // console.log(res)
-        })
-    },
-    methods:{
-
-    }
+    name : 'CheckInput'
 }
 </script>
 
 <style scoped>
-
-</style>>
+    .tag_list{
+        width: 100%;
+        height: 100px;
+        position: relative;
+    }
+</style>

@@ -1,36 +1,41 @@
 <template>
-    <div>
-        <div class="center_body">
-            <!-- <div class="seat"></div> -->
-            <div class="wrap" v-for="item in detail">
-                <a :href="item.node.originalUrl">
-                    <div class="row1">
-                        <div class="left">
-                            <div class="img"></div>
-                            <span>{{ item.node.user.username }}</span>
-                        </div>
-                        <div class="right">
-                            <span>{{ item.node.tags[0].title }}</span>
-                            <span v-if="item.node.tags[1]">/{{ item.node.tags[1].title }}</span>
-                        </div>
+    <div class="conent">
+        <div class="list" v-for="item in detail">
+            <div class="row1">
+                <div class="left">
+                    <div class="img"></div>
+                    <span>{{ item.node.targets[0].user.username }}</span>
+                    <!-- <p>{{ item.node.targets[0].user.company }}</p> -->
+                </div>
+                <div class="right"></div>
+            </div>
+            <div class="row2">
+                <div class="left_content">
+                    <div class="title">
+                        <span>分享</span>
+                        <p>{{ item.node.targets[0].title }}</p>
                     </div>
-                    <div class="row2">
-                        <span class="title">{{ item.node.title }}</span>
-                        <p class="content">
-                            {{ item.node.content.substring(0,90) }}...
+                    <div class="detail">
+                        <p>
+                            {{ item.node.targets[0].content }}
                         </p>
                     </div>
-                    <div class="row3">
-                        <div class="zan">
-                            <i class="iconfont icon-zan"></i>
-                            <span>{{ item.node.likeCount }}</span>
-                        </div>
-                        <div class="pinglun">
-                            <i class="iconfont icon-pinglun"></i>
-                            <span>{{ item.node.commentsCount }}</span>
-                        </div>
-                    </div>
-                </a>
+                </div>
+                <div class="right_img"></div>
+            </div>
+            <div class="row3">
+                <div class="zan">
+                    <i class="iconfont icon-zan"></i>
+                    <span>{{ item.node.targets[0].likeCount }}</span>
+                </div>
+                <div class="ping">
+                    <i class="iconfont icon-pinglun"></i>
+                    <span>{{ item.node.targets[0].commentsCount }}</span>
+                </div>
+                <div class="share">
+                    <i class="iconfont icon-552cc62440096"></i>
+                    <span>分享</span>
+                </div>
             </div>
         </div>
     </div>
@@ -45,7 +50,7 @@ export default {
         }
     },
     methods:{
-
+        
     },
     mounted(){
         let headers = {
@@ -56,121 +61,147 @@ export default {
                         "X-Legacy-Uid": "5d5988d7f265da03ca116b43"
                     };
         let data = {
-                    "extensions": {"query": {"id": "21207e9ddb1de777adeaca7a2fb38030"}},
+                    "extensions": {"query": {"id": "504f6ca050625a4270ba11eebe696b3c"}},
                     "operationName": "",
                     "query": "",
-                    "variables": {"first": 20, "after": "", "order": "POPULAR"},
-                    "after": "",
-                    "first": 20,
-                    "order": "POPULAR"
+                    "variables": {"type": "ARTICLE","first": 20, "after": "1566960555346"}
                 };
         this.axios.post('/a/query',data,{headers: headers}).then((res) => {
-            this.detail = res.data.data.articleFeed.items.edges;
-            console.log(res.data.data.articleFeed.items.edges)
+            this.detail = res.data.data.followingArticleFeed.items.edges;
+            console.log(res.data.data.followingArticleFeed.items.edges)
         });
-    },
+    }
 }
 </script>
 
 <style scoped>
-    .center_body{
+    .conent{
         width: 100%;
-        /* flex:1;
-        overflow: scroll; */
-        background-color:#f4f6f9;
+        height: 100%;
+        position: fixed;
+        flex: 1;
+        overflow: auto;
+        top: 135px;
+        background: #f4f6f9;
         /* border: 1px solid red; */
     }
-    .seat{
+    .list{
         width: 100%;
-        height: 110px;
-        /* border: 1px solid seagreen; */
-    }
-    .wrap{
-        width: 100%;
-        height: 166px;
-        margin: 4px 0;
-        background-color:white; 
-        /* border: 1px solid gold; */
-        /* background: white; */
+        height: 203px;
+        margin:7px 0;
+        background: white;
+        /* border: 1px solid red; */
     }
     .row1{
         width: 100%;
-        height: 40px;
-        /* border: 1px solid aqua; */
-        display: flex;
+        height: 52px;
+        display: flex; 
     }
-    .left{
-        float: left;
-        height: 40px;
-        flex:1;
-        /* border: 1px solid red; */
+    .left {
+        width: 100%;
+        height: 52px;
+        line-height: 52px;
+        flex: 1;
         display: flex;
-        line-height: 1;
-        padding:13px 7px;
+        align-items: center;
     }
     .img{
-        width: 17px;
-        height: 17px;
+        width: 33px;
+        height: 33px;
+        margin-left:9px; 
         border-radius: 50%;
-        background-color: red;
-        background-image: url("../../assets/logo.png");
+        background-image: url(../../../public/头像.jpg);
         background-size: 100% 100%;
         background-repeat: no-repeat;
     }
-    .left span{
-        padding-left:3px; 
-        padding-top:3px; 
-        font-size: 11px;
+    .left span {
+        font-size: 13px;
         font-weight: 600;
-        letter-spacing: 0;
-        color: #515152;
+        color: #1c1c1e;
+        margin-top:-14px; 
+        margin-left:10px; 
+    }
+    .left p{
+        width: 50%;
+        font-size: 12px;
+        color: #8e9dac;
+        margin-top:26px; 
+        margin-left:-53px;
     }
     .right{
-        float: right;
-        flex:1;
-        padding:13px 6px;
-        text-align: right;
-        /* border: 1px solid red; */
-        color: #8a9aa9;
-        font-size: 11px;
-        font-weight: 400;
+        flex: 1;
+        height: 100%;
+        border-radius: 50%;
+        background-image: url(../../../public/点.png);
+        background-position:right;
+        background-size: 80px 100%;
+        background-repeat: no-repeat;
     }
     .row2{
         width: 100%;
-        height: 85px;
+        height: 113px;
         /* border: 1px solid red; */
     }
+    .left_content{
+        width: 75%;
+        height: 100%;
+        margin-left:9px; 
+    }
     .title{
-        position: relative;
-        top: 4px;
-        left: 8px;
-        font-size:15px;
-        font-weight: 600; 
+        height: 25px;
+        line-height: 25px;
+        margin-top:5px; 
+        display: flex;
+    }
+    .title span{
+        width: 10%;
+        height: 10px;
+        background: #edf7ff;
+        border-radius: 5%;
+        font-size: 12px;
+        font-weight: 700;
+        color: #007fff;
+    }
+    .title p{
+        width: 88%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        padding-left: 10px;
+        font-size: 13px;
+        font-weight: 600;
         color: #1c1c1e;
     }
-    .content{
-        color: #67727b;
-        position: relative;
-        top: 10px;
-        left: 8px;
-        font-size:12px;
-        font-weight: 500; 
-        line-height: 18px;
-        letter-spacing: 0.5px;
+    .detail{
+        width: 98%;
+        height: 69px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+    .detail p {
+        padding-top:4px;
+        line-height: 22px; 
+        font-size: 14px;
+        color: #1c1c1e;
+        font-weight: 500;
     }
     .row3{
-        display: flex;
         width: 100%;
-        height: 40px;
-        line-height: 1;
-        /* border: 1px solid aquamarine; */
+        height: 35px;
+        line-height: 35px;
+        /* border: 1px solid aqua;*/
+        border-top:1px solid #f1f1f1; 
+        display: flex; 
     }
     .zan{
-        position: relative;
-        font-size:15px;
-        color: #949ca8;
-        top: 8px;
-        left: 7px;
+        flex: 1;
+        /* border: 1px solid red; */
+        text-align: center;
     }
     .zan i{
         font-size:15px;
@@ -179,20 +210,34 @@ export default {
     .zan span{
         font-size:12px;
         color: #92a1af;
+        padding-left:3px; 
     }
-    .pinglun{
-        position: relative;
+    .ping{
+        flex: 1;
+        /* border: 1px solid red; */
+        text-align: center;
+    }
+    .ping i{
+        font-size:12px;
         color: #949ca8;
-        top: 10px;
-        left: 24px;
     }
-    .pinglun i{
-        font-size:10px;
-        color: #949ca8;
-    }
-    .pinglun span{
+    .ping span{
         font-size:12px;
         color: #92a1af;
-        padding-left: 3px;
+        padding-left:3px; 
+    }
+    .share{
+        flex: 1;
+        /* border: 1px solid red; */
+        text-align: center;
+    }
+    .share i{
+        font-size:16px;
+        color: #949ca8;
+    }
+    .share span{
+        font-size:12px;
+        color: #92a1af;
+        padding-left:3px; 
     }
 </style>

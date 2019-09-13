@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div class="row1"></div>
         <div class="row2">
             <div class="search">
                 <div class="search_input_wrap">
@@ -11,54 +12,18 @@
                     <span>标签</span>
                 </div>
             </div>
-            <div class="tab_list">
-                <yd-tab horizontal-scroll>
-                    <yd-tab-panel label="关注">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="推荐">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="热榜">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="后端">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="前端">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="Android">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="iOS">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="人工智能">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="开发工具">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="代码人生">
-                        <Content />
-                    </yd-tab-panel>
-                    <yd-tab-panel label="阅读">
-                        <Content />
-                    </yd-tab-panel>
-                </yd-tab>
-            </div>
+            <ListTag />
         </div>
     </div>
 </template>
 
 <script>
-import Content from '@/components/Content'
+import ListTag from '@/components/ListTag'
 
 export default {
     name : 'CheckInput',
-    components:{
-        Content
+    components: {
+        ListTag
     },
     data (){
         return{
@@ -93,12 +58,20 @@ export default {
 </script>
 
 <style scoped>
+    .row1{
+        display: none;
+        width: 100%;
+        height: 23px;
+        /* border: 1px solid red; */
+    }
     .row2{
         width: 100%;
         height: 86px;
         position: fixed;
-        top: 0;
+        /* top: 23px; */
+        /* top: 0px; */
         left: 0;
+        /* border: 1px solid red; */
         background: rgba(0,127,255,1);
         /* border-bottom: 1px solid red; */
     }
@@ -113,6 +86,7 @@ export default {
     .row2 .search .search_input_wrap{
         /* display: none; */
         width: 82%;
+        /* flex:1; */
         height: 31px;
         line-height: 1;
         box-sizing: border-box;
